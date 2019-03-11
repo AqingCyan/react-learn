@@ -8,17 +8,19 @@ class TodoItem extends Component {
   }
 
   render() {
+    const {content} = this.props;
     return (
       <div onClick={this.handleClick}>
         {/*使用父组件传来的值*/}
-        {this.props.content}
+        {content}
       </div>
     );
   }
 
   handleClick() {
-    // 子组件修改父组件数据，不能直接修改，那就将父组件方法传给子组件调用
-    this.props.ItemDelete(this.props.index);
+    // 子组件修改父组件数据，不能直接修改，那就将父组件方法传给子组件调用来修改父组件数据
+    const {ItemDelete, index} = this.props;
+    ItemDelete(index);
   }
 }
 

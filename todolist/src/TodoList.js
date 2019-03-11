@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-import './style.css';
 import TodoItem from './TodoItem';
+import './style.css';
 
 class TodoList extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class TodoList extends Component {
       inputValue: '',
       list: []
     };
-    // 把this的指向在这里做修改
+    // 把this的指向在这里做修改，因为方法的this指向是Undefined，我们要让它指向render函数里的this才能修改数据
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleBtnClick = this.handleBtnClick.bind(this);
     // 这里改变this的指向，是为了让子组件从ItemDelete找到父组件this中的handleItemDelete方法
@@ -33,45 +33,57 @@ class TodoList extends Component {
           <button onClick={this.handleBtnClick}>提交</button>
         </div>
         <ul>
-          {
-            this.state.list.map((item, index) => {
-              return (
-                // 使用TodoItem子组件的时候，把item，index传给它
-                <TodoItem
-                  content={item}
-                  key={index}
-                  index={index}
-                  ItemDelete={this.handleItemDelete}
-                />
-              )
-            })
-          }
+          {this.getTodoItem()}
         </ul>
       </Fragment>
     )
   }
 
-  // 方法的this指向是Undefined，我们要让它的this指向变化
-  handleInputChange(e) {
-    this.setState({
-      inputValue: e.target.value
+  //把item的处理提出来，return出去，在render函数中执行
+  getTodoItem() {
+    return this.state.list.map((item, index) => {
+      return (
+        // 使用TodoItem子组件的时候，把item，index传给它
+        <TodoItem
+          content={item}
+          key={index}
+          index={index}
+          ItemDelete={this.handleItemDelete}
+        />
+      )
     })
   }
 
+  // 方法的this指向是Undefined，我们要让它的this指向变化
+  handleInputChange(e) {
+    const value = e.target.value;
+    this.setState(() => ({inputValue: value}))
+  }
+
   handleBtnClick() {
-    this.setState({
-      list: [...this.state.list, this.state.inputValue],
+    // prevState 等价于 this.state
+    this.setState((prevState) => ({
+      list: [...prevState.list, prevState.inputValue],
       inputValue: ''
-    })
+    }));
+    // this.setState({
+    //   list: [...this.state.list, this.state.inputValue],
+    //   inputValue: ''
+    // })
   }
 
   handleItemDelete(index) {
     // immutable原则：state不允许我们做任何的改变
-    const list = [...this.state.list];
-    list.splice(index, 1);
-    this.setState({
-      list: list
+    this.setState((prevState) => {
+      const list = [...prevState.list];
+      list.splice(index, 1);
+      return {list}
     })
+    // const list = [...this.state.list];
+    // list.splice(index, 1);
+    // this.setState({
+    //   list: list
+    // })
   }
 }
 
