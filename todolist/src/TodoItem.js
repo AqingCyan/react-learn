@@ -8,11 +8,23 @@ class TodoItem extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // 当一个组件从父组件接收了参数，只要父组件的render函数被执行了，子组件的生命周期函数就会执行
+  // 也就是说，如果这个组件第一次存在于父组件中，不会执行
+  // 如果这个组件之前已经存在于父组件中，就会执行
+  componentWillReceiveProps() {
+    console.log('child componentWillReceiveProps');
+  }
+
+  // 当这个组件即将要被从页面中剔除的时候，就会自动执行
+  componentWillUnmount() {
+    console.log('child componentWillUnmount');
+  }
+
   render() {
+    console.log('子组件render执行');
     const {content, test} = this.props;
     return (
       <div onClick={this.handleClick}>
-        {/*使用父组件传来的值*/}
         {test} - {content}
       </div>
     );
@@ -29,7 +41,7 @@ class TodoItem extends Component {
 TodoItem.propTypes = {
   // 要求test是必传值（这里test只做试验）
   test: PropTypes.string.isRequired,
-  content: PropTypes.string,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // content是两个类型中的一个
   ItemDelete: PropTypes.func,
   index: PropTypes.number
 };

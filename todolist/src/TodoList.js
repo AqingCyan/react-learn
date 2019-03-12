@@ -1,6 +1,5 @@
 import React, {Component, Fragment} from 'react';
 import TodoItem from './TodoItem';
-import Test from './Test';
 import './style.css';
 
 class TodoList extends Component {
@@ -18,6 +17,33 @@ class TodoList extends Component {
     this.handleItemDelete = this.handleItemDelete.bind(this);
   }
 
+  // 在组件即将被挂在到页面之前执行
+  componentWillMount() {
+    console.log('componentWillMount');
+  }
+
+  // 组件被更新之前，会被自动执行，返回false会阻止组件更新
+  shouldComponentUpdate() {
+    console.log('shouldComponentUpdate');
+    return true
+  }
+
+  // 组件被更新之前，它会自动执行，但是它会在shouldComponentUpdate之前执行，
+  // 如果shouldComponentUpdate返回true它才执行，返回false就不会执行这个函数
+  componentWillUpdate() {
+    console.log('componentWillUpdate');
+  }
+
+  // 组件更新完成后，它会自动执行
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
+
+  // 组件收到props才会自动执行，因此，这个组件不会执行这个方法
+  componentWillReceiveProps() {
+    console.log('componentWillReceiveProps');
+  }
+
   render() {
     console.log('父组件render执行');
     return (
@@ -32,15 +58,25 @@ class TodoList extends Component {
             className='input'
             value={this.state.inputValue}
             onChange={this.handleInputChange}
+            // 让this.input指input向框这个DOM节点，但不建议使用，尽量使用数据驱动
+            ref={(input) => {
+              this.input = input
+            }}
           />
           <button onClick={this.handleBtnClick}>提交</button>
         </div>
-        <ul>
+        <ul ref={(ul) => {
+          this.ul = ul
+        }}>
           {this.getTodoItem()}
         </ul>
-        <Test content={this.state.inputValue}/>
       </Fragment>
     )
+  }
+
+  // 组件被页面挂载之后执行
+  componentDidMount() {
+    console.log('componentDidMount');
   }
 
   //把item的处理提出来，return出去，在render函数中执行
@@ -50,7 +86,7 @@ class TodoList extends Component {
         // 使用TodoItem子组件的时候，把item，index传给它
         <TodoItem
           content={item}
-          key={index}
+          key={item}
           index={index}
           ItemDelete={this.handleItemDelete}
         />
@@ -59,8 +95,8 @@ class TodoList extends Component {
   }
 
   // 方法的this指向是Undefined，我们要让它的this指向变化
-  handleInputChange(e) {
-    const value = e.target.value;
+  handleInputChange() {
+    const value = this.input.value;
     this.setState(() => ({inputValue: value}))
   }
 
@@ -69,25 +105,20 @@ class TodoList extends Component {
     this.setState((prevState) => ({
       list: [...prevState.list, prevState.inputValue],
       inputValue: ''
-    }));
-    // this.setState({
-    //   list: [...this.state.list, this.state.inputValue],
-    //   inputValue: ''
-    // })
+    }), () => {
+      // 若是把这句代码放在起一个回调函数内执行，会发现length总是少1，原因是setState是异步的。
+      // 而setState的第二个参数也是一个回调函数，它会等setState异步执行完后执行，也就是等页面更新完了才会执行。
+      console.log(this.ul.querySelectorAll('div').length);
+    });
   }
 
   handleItemDelete(index) {
-    // immutable原则：state不允许我们做任何的改变
+    // immutable原则：state不允许我们直接做任何的改变，因此我们得转化一下
     this.setState((prevState) => {
       const list = [...prevState.list];
       list.splice(index, 1);
       return {list}
     })
-    // const list = [...this.state.list];
-    // list.splice(index, 1);
-    // this.setState({
-    //   list: list
-    // })
   }
 }
 
