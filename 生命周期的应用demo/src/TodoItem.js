@@ -7,7 +7,14 @@ class TodoItem extends Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  // 利用生命周期函数优化性能，如果新的Props变化了（nextProps.content === this.props.content 说明没有变化），就让render函数执行
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    return nextProps.content !== this.props.content;
+  }
+
   render() {
+    // 通过打印，我们可以看到，即使父组件变化，也会使子组件的render函数执行，这会影响到性能上的损耗
+    console.log('child render');
     const {content} = this.props;
     return (
       <div onClick={this.handleClick}>

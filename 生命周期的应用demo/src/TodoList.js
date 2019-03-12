@@ -34,12 +34,17 @@ class TodoList extends Component {
     )
   }
 
+  componentDidMount() {
+    // 因为componentDidMount只会执行一次，页面加载时的ajax放在这里保证只发起一次请求即可
+    console.log('ajax请求放在这里');
+  }
+
   getTodoItem() {
     return this.state.list.map((item, index) => {
       return (
         <TodoItem
           content={item}
-          key={item}
+          key={index}
           index={index}
           ItemDelete={this.handleItemDelete}
         />
