@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class TodoItem extends Component {
   constructor(props) {
@@ -8,11 +9,11 @@ class TodoItem extends Component {
   }
 
   render() {
-    const {content} = this.props;
+    const {content, test} = this.props;
     return (
       <div onClick={this.handleClick}>
         {/*使用父组件传来的值*/}
-        {content}
+        {test} - {content}
       </div>
     );
   }
@@ -23,5 +24,20 @@ class TodoItem extends Component {
     ItemDelete(index);
   }
 }
+
+// 对父组件传入值的类型的检测
+TodoItem.propTypes = {
+  // 要求test是必传值（这里test只做试验）
+  test: PropTypes.string.isRequired,
+  content: PropTypes.string,
+  ItemDelete: PropTypes.func,
+  index: PropTypes.number
+};
+
+// 若父组件未给子组件传值，这里设置默认值
+// test未传，就传入默认值
+TodoItem.defaultProps = {
+  test: 'hello world'
+};
 
 export default TodoItem;
