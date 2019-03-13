@@ -41,3 +41,53 @@ npm install
 ```shell
 npm run start
 ```
+
+### React动画的demo
+
+React的动画实现依赖ReactTransition库的实现，具体内容建议结合代码和文档阅读。
+
+- 进入对应目录
+
+```shell
+cd animation
+```
+
+- 安装依赖
+
+```shell
+npm install
+```
+
+- 运行ReactDemo
+
+```shell
+npm run start
+```
+
+### Redux管理数据与todolist的重构
+
+如果项目变成大型项目，React作为视图层的框架显然不能够更好的处理数据层的内容。因此，我们需要一个抽离出来的模块去管理数据层的内容。Redux应运而生，这里对Redux做了一个详细的描述，并且对我们之前写的代码用Redux进行了重构。
+
+#### 你应该了解的内容：
+
+[Redux如何理解？](./book/Redux概念.md)
+
+#### 你应该阅读的代码：
+
+- 进入对应目录
+
+```shell
+cd todolist_antd
+```
+
+- 安装依赖
+
+```shell
+npm install
+```
+
+- 运行ReactDemo
+
+```shell
+npm run start
+```
