@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react';
+import axios from 'axios';
 import TodoItem from './TodoItem';
 import './style.css';
 
@@ -36,7 +37,15 @@ class TodoList extends Component {
 
   componentDidMount() {
     // 因为componentDidMount只会执行一次，页面加载时的ajax放在这里保证只发起一次请求即可
-    console.log('ajax请求放在这里');
+    axios.get('./todolist.json')
+      .then((res) => {
+        this.setState(() => {
+          return {
+            list: [...res.data]
+          }
+        })
+      })
+      .catch(() => {alert('error')})
   }
 
   getTodoItem() {
