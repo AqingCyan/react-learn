@@ -106,7 +106,7 @@ class TodoList extends Component {
       list: [...prevState.list, prevState.inputValue],
       inputValue: ''
     }), () => {
-      // 若是把这句代码放在起一个回调函数内执行，会发现length总是少1，原因是setState是异步的。
+      // 若是把这句代码放在setState外面执行，会发现length总是少1，原因是setState是异步的。
       // 而setState的第二个参数也是一个回调函数，它会等setState异步执行完后执行，也就是等页面更新完了才会执行。
       console.log(this.ul.querySelectorAll('div').length);
     });
