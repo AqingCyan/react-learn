@@ -22,6 +22,7 @@ npm run start
 
 #### 笔记配合阅读
 - [入门：从todolist开始](./book/01.从TodoList开始.md)
+- [补充：第一个demo还需要了解这些](./book/02.todolist的细节补充.md)
 - [理解：虚拟DOM是什么？](./book/03.虚拟DOM.md)
 - [理解：Diff算法是性能飞跃的核心](./book/04.虚拟DOM的Diff算法.md)
 - [掌握：生命周期函数](./book/生命周期.md)
