@@ -69,23 +69,9 @@ npm run start
 ### React动画的demo
 
 React的动画实现依赖ReactTransition库的实现，具体内容建议结合代码和文档阅读。
-
-- 进入对应目录
-
+#### 你应该读的源码
 ```shell
 cd animation
-```
-
-- 安装依赖
-
-```shell
-npm install
-```
-
-- 运行ReactDemo
-
-```shell
-npm run start
 ```
 
 ### Redux管理数据与todolist的重构
@@ -95,23 +81,9 @@ npm run start
 #### 你应该了解的内容：
 
 [Redux如何理解？](./book/06.Redux的初步了解.md)
+[Redux和AntD组件重构todo，一定要仔细读笔记和源码啦！](./book/07.如何用Redux重构todo.md)
 
 #### 你应该阅读的代码：
-
-- 进入对应目录
-
 ```shell
 cd todolist_antd
-```
-
-- 安装依赖
-
-```shell
-npm install
-```
-
-- 运行ReactDemo
-
-```shell
-npm run start
 ```
