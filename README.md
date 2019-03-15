@@ -80,8 +80,8 @@ cd animation
 
 #### 你应该了解的内容：
 
-[Redux如何理解？](./book/06.Redux的初步了解.md)
-[Redux和AntD组件重构todo，一定要仔细读笔记和源码啦！](./book/07.如何用Redux重构todo.md)
+- [Redux如何理解？](./book/06.Redux的初步了解.md)
+- [Redux和AntD组件重构todo，一定要仔细读笔记和源码啦！](./book/07.如何用Redux重构todo.md)
 
 #### 你应该阅读的代码：
 ```shell
