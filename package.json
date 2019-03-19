@@ -1,0 +1,29 @@
+{
+  "name": "react.js-learn",
+  "version": "1.0.0",
+  "description": "从Vue框架的学习转到React，发现这是一个书写十分优雅的前端框架。因此，具有对比思维的学习React促使了这个仓库的诞生。学无止境，demo与笔记以及练手项目都会在这里一一说明展示。为以后的知识沉淀做铺垫。",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AqingCyan/react-learn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AqingCyan/react-learn/issues"
+  },
+  "homepage": "https://github.com/AqingCyan/react-learn#readme",
+  "devDependencies": {
+    "vuepress": "^0.14.10",
+    "webpack-dev-middleware": "^3.6.0"
+  }
+}
