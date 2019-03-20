@@ -20,13 +20,13 @@ module.exports = {
         title: '基础知识点',
         collapsable: false,
         children: [
-          'book/01.从TodoList开始',
-          'book/02.todolist的细节补充',
-          'book/03.虚拟DOM.md',
-          'book/04.虚拟DOM的Diff算法',
-          'book/05.生命周期',
-          'book/06.Redux的初步了解',
-          'book/07.如何用Redux重构todo'
+          ['book/01.从TodoList开始', '从TodoList开始'],
+          ['book/02.todolist的细节补充', 'Todo还有这些细节'],
+          ['book/03.虚拟DOM.md', '虚拟DOM是什么'],
+          ['book/04.虚拟DOM的Diff算法', 'Diff算法提升性能'],
+          ['book/05.生命周期', '生命周期了解'],
+          ['book/06.Redux的初步了解', 'Redux如何管理数据'],
+          ['book/07.如何用Redux重构todo', '使用Redux来重构Todo']
         ]
       }
     ]
