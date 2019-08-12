@@ -1,7 +1,7 @@
 {
   "name": "react.js-learn",
   "version": "1.0.0",
-  "description": "从Vue框架的学习转到React，发现这是一个书写十分优雅的前端框架。因此，具有对比思维的学习React促使了这个仓库的诞生。学无止境，demo与笔记以及练手项目都会在这里一一说明展示。为以后的知识沉淀做铺垫。",
+  "description": "知识补充，从Vue转型到React的重新学习，因此规范自己的学习过程",
   "main": "index.js",
   "directories": {
     "doc": "docs"
