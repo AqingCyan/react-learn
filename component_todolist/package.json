@@ -1,5 +1,5 @@
 {
-  "name": "simple_todolist",
+  "name": "component_todolist",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
