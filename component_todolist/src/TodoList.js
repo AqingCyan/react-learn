@@ -9,6 +9,9 @@ class TodoList extends Component {
       inputValue: "",
       todos: []
     }
+    this.handleButtonClick = this.handleButtonClick.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleItemDelete = this.handleItemDelete.bind(this)
   }
 
   render() {
@@ -21,26 +24,31 @@ class TodoList extends Component {
             id="insert"
             className="input"
             value={this.state.inputValue}
-            onChange={this.handleInputChange.bind(this)}
+            onChange={this.handleInputChange}
           />
-          <button onClick={this.handleButtonClick.bind(this)}>提交</button>
-          <ul>
-            {this.state.todos.map((item, index) => {
-              return (
-                <div>
-                  <TodoItem
-                    content={item}
-                    index={index}
-                    key={index}
-                    deleteItem={this.handleItemDelete.bind(this)}
-                  />
-                </div>
-              )
-            })}
-          </ul>
+          <button onClick={this.handleButtonClick}>提交</button>
+          <ul>{this.getTodoItem()}</ul>
         </div>
       </Fragment>
     )
+  }
+
+  /**
+   * 把遍历渲染 Item 的 JSX 封装成方法（优化）
+   * @returns TodoItem 遍历渲染出来的 JSX
+   * @memberof TodoList
+   */
+  getTodoItem() {
+    return this.state.todos.map((item, index) => {
+      return (
+        <TodoItem
+          content={item}
+          index={index}
+          key={index}
+          deleteItem={this.handleItemDelete}
+        />
+      )
+    })
   }
 
   /**
@@ -48,9 +56,11 @@ class TodoList extends Component {
    * @param {object} e 事件对象集合
    */
   handleInputChange(e) {
-    this.setState({
-      inputValue: e.target.value
-    })
+    // 16版本中，setState 可以写入函数，并且它有一个参数是 prevState 代表改变前的状态，可以用来优化代码
+    const value = e.target.value
+    this.setState(() => ({
+      inputValue: value
+    }))
   }
 
   /**
@@ -58,10 +68,11 @@ class TodoList extends Component {
    * @param {object} e 事件对象集合
    */
   handleButtonClick() {
-    this.setState({
-      todos: [...this.state.todos, this.state.inputValue],
+    // 箭头函数可以使用简化 return 的写法
+    this.setState(prevState => ({
+      todos: [...prevState.todos, prevState.inputValue],
       inputValue: ""
-    })
+    }))
   }
 
   /**
@@ -69,10 +80,10 @@ class TodoList extends Component {
    * @param {object} e  事件对象集合
    */
   handleItemDelete(index) {
-    const list = [...this.state.todos]
-    list.splice(index, 1)
-    this.setState({
-      todos: list
+    this.setState(prevState => {
+      const list = [...prevState.todos]
+      list.splice(index, 1)
+      return { todos: list }
     })
   }
 }
