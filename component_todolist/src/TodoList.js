@@ -1,17 +1,17 @@
-import React, {Component, Fragment} from "react"
+import React, { Component, Fragment } from "react"
 import TodoItem from "./TodoItem"
 import "./style.css"
 
 class TodoList extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       inputValue: "",
       todos: []
-    };
-    this.handleButtonClick = this.handleButtonClick.bind(this);
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleItemDelete = this.handleItemDelete.bind(this);
+    }
+    this.handleButtonClick = this.handleButtonClick.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleItemDelete = this.handleItemDelete.bind(this)
   }
 
   render() {
@@ -25,6 +25,7 @@ class TodoList extends Component {
             className="input"
             value={this.state.inputValue}
             onChange={this.handleInputChange}
+            ref={input => (this.input = input)}
           />
           <button onClick={this.handleButtonClick}>提交</button>
           <ul>{this.getTodoItem()}</ul>
@@ -56,7 +57,8 @@ class TodoList extends Component {
    */
   handleInputChange(e) {
     // 16版本中，setState 可以写入函数，并且它有一个参数是 prevState 代表改变前的状态，可以用来优化代码
-    const value = e.target.value;
+    const value = e.target.value
+    // const value = this.input.value // 可以使用 ref 获取 DOM 元素取值
     this.setState(() => ({
       inputValue: value
     }))
@@ -79,11 +81,11 @@ class TodoList extends Component {
    */
   handleItemDelete(index) {
     this.setState(prevState => {
-      const list = [...prevState.todos];
-      list.splice(index, 1);
-      return {todos: list}
+      const list = [...prevState.todos]
+      list.splice(index, 1)
+      return { todos: list }
     })
   }
 }
 
-export default TodoList;
+export default TodoList
